@@ -1,5 +1,7 @@
+const { createSecretKey } = require("crypto");
 const Orders = require("../models/order.model");
 const Users = require("../models/user.model");
+const Carts = require("../models/cart.model");
 
 exports.getAllOrders = (req, res) => {
   try {
@@ -92,16 +94,19 @@ exports.getOrderByUserId = async (req, res) => {
 exports.placeOrder = (req, res) => {
   try {
     const payload = req.body;
+    const user = payload.user;
     const newOrder = new Orders(payload);
     newOrder
       .save()
-      .then((data) => {
+      .then(async (data) => {
+        await Carts.deleteOne({user:user});
         res.status(200).send({
           message: "Order placed successfully.",
           data: data,
         });
       })
       .catch((error) => {
+        console.log("Error while : ", error)
         return res.status(400).send({
           message: "Error while placing order.",
           error: error,
