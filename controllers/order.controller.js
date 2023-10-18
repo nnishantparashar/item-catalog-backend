@@ -91,7 +91,7 @@ exports.getOrderByUserId = async (req, res) => {
   }
 };
 
-exports.placeOrder = (req, res) => {
+exports.placeOrder = async (req, res) => {
   try {
     const payload = req.body;
     const user = payload.user;
@@ -112,6 +112,23 @@ exports.placeOrder = (req, res) => {
           error: error,
         });
       });
+      const products = await Products.find();
+      const orders = await Orders.find();
+      products.forEach((product) => {
+        orders.productList.forEach((item) =>{
+          if(product.productId === item.productId){
+            let id = product.productId;
+            let newQuantity = item.quantiy;
+            Products.findOneAndUpdate(
+              { productId: id },
+              { $set: { "quantity": newQuantity } }
+            );
+          }
+        }
+        )
+        
+      });
+
   } catch (error) {
     res.status(500).send({
       message: "Internal Server Error",
