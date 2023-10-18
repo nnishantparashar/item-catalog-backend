@@ -76,7 +76,6 @@ exports.login = async (req, res) => {
         return res.status(200).send({
           message: "User logged-in successfully.",
           data: data,
-          cookie: cookie
         });
        
       }
