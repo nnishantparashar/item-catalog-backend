@@ -6,13 +6,14 @@ const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
 const cartRoutes = require("./routes/cart.routes");
 const orderRoutes = require("./routes/order.routes");
+const cors = require("cors");
 const app = express();
 
 //Connect to DB
 db();
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(cors());
 app.use(authRoutes);
 app.use(productRoutes);
 app.use(cartRoutes);
