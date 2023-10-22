@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
         );
         //set session for 1hr(3600000 miliseconds)
         res.cookie("accessToken", token, {
-          expires: new Date(Date.now() + 3600000), sameSite: "none"
+          expires: new Date(Date.now() + 3600000),
         });
         return res.status(200).send({
           message: "User logged-in successfully.",
