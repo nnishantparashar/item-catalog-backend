@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
         );
         //set session for 1hr(3600000 miliseconds)
         res.cookie("accessToken", token, {
-          expires: new Date(Date.now() + 3600000),
+          expires: new Date(Date.now() + 86400000),
         });
         return res.status(200).send({
           message: "User logged-in successfully.",
@@ -304,6 +304,3 @@ exports.activateAccount = async (req, res) => {
 
 
 
-// send account activation email to user at the time of registration.
-// create sendMail for activation also.
-// test run... 12/10/23
