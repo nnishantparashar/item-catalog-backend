@@ -13,9 +13,8 @@ const app = express();
 db();
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
-      origin: "https://render.com/",
+app.use(cors({
+      origin: ["https://render.com/","http://localhost:3000/"],
       credentials: true,
     })
   );
