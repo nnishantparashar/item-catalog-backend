@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 exports.isAuth = async (req, res, next) => {
   const { cookies } = req;
-
   if (cookies.accessToken) {
     let obj = await jwt.verify(cookies.accessToken, process.env.SECRET_KEY);
 
