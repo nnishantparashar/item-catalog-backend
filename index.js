@@ -11,21 +11,24 @@ const app = express();
 
 //Connect to DB
 db();
-app.use(express.json());
 
-app.use(cors({
-    origin:["http://localhost:3000", "https://itemcatalog-t930.onrender.com"],
-    methods:["POST", "GET"],
-    credentials: true
-}));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: "GET,POST,PUT,DELETE",
+    optionsSuccessStatus: 200,
+  })
+);
+app.use(express.json());
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
 });
 app.use(cookieParser());
 app.use(authRoutes);
@@ -33,9 +36,8 @@ app.use(productRoutes);
 app.use(cartRoutes);
 app.use(orderRoutes);
 
-
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log("App is running on PORT :", PORT);
+  console.log("App is running on PORT :", PORT);
 });
