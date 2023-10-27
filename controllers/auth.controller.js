@@ -70,9 +70,9 @@ exports.login = async (req, res) => {
           process.env.SECRET_KEY
         );
         //set session for 1hr(3600000 miliseconds)
-        res.cookie("accessToken", token, {
-          expires: new Date(Date.now() + 86400000),
-        });
+        // res.cookie("accessToken", token, {
+        //   expires: new Date(Date.now() + 86400000),
+        // });
         return res.status(200).send({
           message: "User logged-in successfully.",
           data: data,
