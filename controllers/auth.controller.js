@@ -97,7 +97,8 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    await res.clearCookie("accessToken");
+   
+   // await res.clearCookie("accessToken");
 
     return res.status(200).send({
       message: "User logges-out successfully.",
