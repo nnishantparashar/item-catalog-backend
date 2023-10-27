@@ -2,6 +2,8 @@ const Products = require("../models/product.model");
 
 
 exports.getAllProducts = (req, res) => {
+  const cookie = req.accessToken;
+  console.log("product-route : ", cookie);
     try {
         Products.find()
         .then((data) => {
