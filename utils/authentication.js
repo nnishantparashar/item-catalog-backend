@@ -5,7 +5,6 @@ exports.isAuth = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   
   if (token) {
-    console.log("Auth token : ", token)
     let obj = await jwt.verify(token, process.env.SECRET_KEY);
 
     req._id = obj._id;

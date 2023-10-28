@@ -51,7 +51,6 @@ exports.getProductById = (req, res) => {
           });
         });
     } catch (error) {
-      console.log("Error: ", error);
       res.status(500).send({
         message: "Internal server error",
         error:error,
@@ -105,7 +104,6 @@ exports.updateProduct = (req, res) => {
         })
         
     } catch (error) {
-        console.log("Product update error : ", error);
         res.status(500).send({
             message:"Internal Server Error",
             error: error,
@@ -131,7 +129,6 @@ exports.deleteProductById = (req, res) => {
           });
         });
     } catch (error) {
-      console.log("Error: ", error);
       res.status(500).send({
         message: "Internal server error",
         error:error,

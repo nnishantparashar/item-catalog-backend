@@ -61,7 +61,6 @@ exports.getOrderByUserId = async (req, res) => {
     const userId = req.params.userId;
     const currentUser = await Users.findOne({ _id: userId });
     const user = currentUser.email;
-    console.log("User Email : ", user);
 
     Orders.find({ user: user })
       .then((data) => {
@@ -83,7 +82,6 @@ exports.getOrderByUserId = async (req, res) => {
         });
       });
   } catch (error) {
-    console.log("ByuserIdError : ", error);
     res.status(500).send({
       message: "Internal Server Error",
       error: error,
@@ -106,7 +104,7 @@ exports.placeOrder = async (req, res) => {
         });
       })
       .catch((error) => {
-        console.log("Error while : ", error)
+       
         return res.status(400).send({
           message: "Error while placing order.",
           error: error,
@@ -154,7 +152,7 @@ exports.deleteOrderById = (req, res) => {
         });
       });
   } catch (error) {
-    console.log("Error: ", error);
+    
     res.status(500).send({
       message: "Internal server error",
       error: error,

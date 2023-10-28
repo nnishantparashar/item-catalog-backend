@@ -17,6 +17,3 @@ router.post("/cancel-order/:orderId", isAuth, isAdmin, deleteOrderById);
 
 module.exports = router;
 
-
-// isAuth, isAdmin testing done
-// Testing pending of all orders routes

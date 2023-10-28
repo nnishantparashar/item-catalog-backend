@@ -21,7 +21,6 @@ exports.sendEmail = async (email, subject, content) => {
     return true;
     
   } catch (error) {
-    console.log("Error while sending email: Internal Server Error: ", error);
     return false;
   }
 };

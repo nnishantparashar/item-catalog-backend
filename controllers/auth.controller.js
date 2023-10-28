@@ -11,9 +11,7 @@ exports.register = async (req, res) => {
     const payload = req.body;
     const hashedValue = await bcrypt.hash(payload.password, 10);
     payload.hashedPassword = hashedValue;
-
     delete payload.password;
-
     const newUser = new Users(payload);
 
     newUser
@@ -51,8 +49,6 @@ exports.login = async (req, res) => {
       "name": name
     }
 
-    
-
     if (existingUser) {
       const isValidUser = await bcrypt.compare(
         password,
@@ -69,10 +65,6 @@ exports.login = async (req, res) => {
           { _id: existingUser._id },
           process.env.SECRET_KEY
         );
-        //set session for 1hr(3600000 miliseconds)
-        // res.cookie("accessToken", token, {
-        //   expires: new Date(Date.now() + 86400000),
-        // });
         return res.status(200).send({
           message: "User logged-in successfully.",
           data: data,
@@ -97,9 +89,6 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-   
-   // await res.clearCookie("accessToken");
-
     return res.status(200).send({
       message: "User logges-out successfully.",
     });
@@ -120,7 +109,6 @@ exports.forgotPassword = async (req, res) => {
       });
     }
     const user = await Users.findOne({ email: email });
-
     if (!user) {
       return res.status(400).send({
         message: "User with given email doesn't exist.",
@@ -201,7 +189,6 @@ exports.resetPassword = async (req, res) => {
         });
       });
   } catch (error) {
-    //console.log("Error while reseting: ", error);
     res.status(500).send({
       message: "Internal Server Error",
       error: error,

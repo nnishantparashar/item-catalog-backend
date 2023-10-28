@@ -50,7 +50,6 @@ exports.addCartItem = async (req, res) => {
       Carts.updateOne(
         { user: user },
         { $push: { productList: newItem } },
-        // { $set: { totalAmount: total } }
       )
         .then(async (data) => {
           await cartUser.updateOne({ $set: { totalAmount: total } });
