@@ -29,7 +29,6 @@ exports.register = async (req, res) => {
         });
       });
   } catch (error) {
-    
     res.status(500).send({
       message: "Internal Server Error",
       error: error,
@@ -41,15 +40,15 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const existingUser = await Users.findOne({ email: email });
-    const id = (existingUser._id).toString();
-    const name = existingUser.name;
-    const data = {
-      "id": id,
-      "email": email,
-      "name": name
-    }
 
     if (existingUser) {
+      const id = existingUser._id.toString();
+      const name = existingUser.name;
+      const data = {
+        id: id,
+        email: email,
+        name: name,
+      };
       const isValidUser = await bcrypt.compare(
         password,
         existingUser.hashedPassword
@@ -70,7 +69,6 @@ exports.login = async (req, res) => {
           data: data,
           accessToken: token,
         });
-       
       }
       return res.status(400).send({
         message: "Invalid credentials.",
@@ -247,7 +245,7 @@ exports.verifyAccount = async (req, res) => {
       error: error,
     });
   }
-}
+};
 
 exports.activateAccount = async (req, res) => {
   try {
@@ -290,6 +288,3 @@ exports.activateAccount = async (req, res) => {
     });
   }
 };
-
-
-
