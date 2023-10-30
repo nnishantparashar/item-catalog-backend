@@ -127,7 +127,8 @@ exports.forgotPassword = async (req, res) => {
 
     await tokenPayload.save();
 
-    const link = `http://localhost:3000/rest-password/?token=${newToken}&userId=${user._id}`;
+    //Replace this link with live link, after deployment.
+    const link = `http://localhost:3000/reset-password/?token=${newToken}&userId=${user._id}`;
 
     const isMailSent = await sendEmail(user.email, "RESET PASSWORD", {
       resetPasswordLink: link,
