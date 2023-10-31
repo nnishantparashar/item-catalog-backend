@@ -2,7 +2,7 @@ const Carts = require("../models/cart.model");
 
 exports.getCartItems = async (req, res) => {
   try {
-    const { user } = req.body;
+    const user = req.params.user;
     const cartUser = await Carts.findOne({ user: user });
     if (cartUser) {
       return res.status(200).send({

@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     return res.status(200).send({
-      message: "User logges-out successfully.",
+      message: "User logged-out successfully.",
     });
   } catch (error) {
     res.status(500).send({
