@@ -1,8 +1,11 @@
 const Carts = require("../models/cart.model");
+const Users = require("../models/user.model");
 
 exports.getCartItems = async (req, res) => {
   try {
-    const user = req.params.user;
+    const userId = req.params.userId;
+    const User = await Users.findOne({id: userId});
+    const user = User.email;
     const cartUser = await Carts.findOne({ user: user });
     if (cartUser) {
       return res.status(200).send({
