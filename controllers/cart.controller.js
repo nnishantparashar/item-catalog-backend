@@ -14,7 +14,7 @@ exports.getCartItems = async (req, res) => {
       });
     }
 
-    return res.status(400).send({
+    return res.status(200).send({
       message: "No item in user's cart",
     });
   } catch (error) {
