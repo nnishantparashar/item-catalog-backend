@@ -125,15 +125,17 @@ exports.updateCartItem = async(req, res) => {
     const productId = payload.productId;
     const user = payload.user;
     const newQuantity = payload.quantity;
-    const total = payload.totalAmount;
+    const totalPrice = payload.totalPrice
+    const totalAmount = payload.totalAmount;
     const cartUser = await Carts.findOne({ user: user });
 
     Carts.findOneAndUpdate(
       { user: user, "productList.productId": productId },
-      { $set: { "productList.$.quantity": newQuantity } }
+      { $set: { "productList.$.quantity": newQuantity } },
+      { $set: { "productList.$.totalPrice": totalPrice } }
     )
       .then(async (data) => {
-        await cartUser.updateOne({ $set: { totalAmount: total } });
+        await cartUser.updateOne({ $set: { totalAmount: totalAmount } });
         return res.status(200).send({
           message: "item successfully updated",
         });
