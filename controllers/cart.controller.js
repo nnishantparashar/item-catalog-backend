@@ -131,8 +131,7 @@ exports.updateCartItem = async(req, res) => {
 
     Carts.findOneAndUpdate(
       { user: user, "productList.productId": productId },
-      { $set: { "productList.$.quantity": newQuantity } },
-      { $set: { "productList.$.totalPrice": totalPrice } }
+      { $set: { "productList.$.quantity": newQuantity, "productList.$.totalPrice": totalPrice } }
     )
       .then(async (data) => {
         await cartUser.updateOne({ $set: { totalAmount: totalAmount } });
