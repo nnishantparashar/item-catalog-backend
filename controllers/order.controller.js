@@ -110,13 +110,14 @@ exports.placeOrder = async (req, res) => {
           error: error,
         });
       });
+      // update quantity of product after placing order
       const products = await Products.find();
       const orders = await Orders.find();
       products.forEach((product) => {
         orders.productList.forEach((item) =>{
           if(product.productId === item.productId){
             let id = product.productId;
-            let newQuantity = item.quantiy;
+            let newQuantity = product.quantity - item.quantiy;
             Products.findOneAndUpdate(
               { productId: id },
               { $set: { "quantity": newQuantity } }
@@ -151,6 +152,7 @@ exports.deleteOrderById = (req, res) => {
           erroe: error,
         });
       });
+      // update quantity of product after deleting order
   } catch (error) {
     
     res.status(500).send({
