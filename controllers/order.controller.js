@@ -2,6 +2,7 @@ const { createSecretKey } = require("crypto");
 const Orders = require("../models/order.model");
 const Users = require("../models/user.model");
 const Carts = require("../models/cart.model");
+const Products = require("../models/product.model");
 
 exports.getAllOrders = (req, res) => {
   try {
@@ -113,6 +114,8 @@ exports.placeOrder = async (req, res) => {
       // update quantity of product after placing order
       const products = await Products.find();
       const orders = await Orders.find();
+      console.log("Order :", orders);
+      console.log("Products : ",products)
       products.forEach((product) => {
         orders.productList.forEach((item) =>{
           if(product.productId === item.productId){
@@ -129,6 +132,7 @@ exports.placeOrder = async (req, res) => {
       });
 
   } catch (error) {
+    console.log("Error : ", error)
     res.status(500).send({
       message: "Internal Server Error",
       error: error,
