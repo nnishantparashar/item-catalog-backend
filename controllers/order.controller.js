@@ -3,6 +3,7 @@ const Orders = require("../models/order.model");
 const Users = require("../models/user.model");
 const Carts = require("../models/cart.model");
 const Products = require("../models/product.model");
+const mongoose = require("mongoose");
 
 exports.getAllOrders = (req, res) => {
   try {
@@ -94,6 +95,7 @@ exports.placeOrder = async (req, res) => {
   try {
     const payload = req.body;
     const user = payload.user;
+    const productList = payload.productList;
     const newOrder = new Orders(payload);
     newOrder
       .save()
@@ -113,18 +115,19 @@ exports.placeOrder = async (req, res) => {
       });
       // update quantity of product after placing order
       const products = await Products.find();
-      const orders = await Orders.find();
-      console.log("Order :", orders);
-      console.log("Products : ",products)
+   
       products.forEach((product) => {
-        orders.productList.forEach((item) =>{
+        productList.forEach((item) =>{
           if(product.productId === item.productId){
             let id = product.productId;
-            let newQuantity = product.quantity - item.quantiy;
-            Products.findOneAndUpdate(
+            let newQuantity = parseInt(product.quantity - item.quantity);
+           
+            Products.updateOne(
               { productId: id },
-              { $set: { "quantity": newQuantity } }
-            );
+              { $set: { quantity: newQuantity } }
+            ).then((data) =>{
+              
+            })
           }
         }
         )
