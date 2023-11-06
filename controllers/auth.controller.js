@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
         id: id,
         email: email,
         name: name,
+        role: existingUser.role,
       };
       const isValidUser = await bcrypt.compare(
         password,
