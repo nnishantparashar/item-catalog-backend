@@ -238,7 +238,7 @@ exports.verifyAccount = async (req, res) => {
       });
     }
 
-    return res.status(400).send({
+    return res.status(500).send({
       message: "Error while sending email.",
     });
   } catch (error) {
