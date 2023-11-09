@@ -129,7 +129,7 @@ exports.forgotPassword = async (req, res) => {
     await tokenPayload.save();
 
     //Replace this link with live link, after deployment.
-    const link = `http://localhost:3000/reset-password/?token=${newToken}&userId=${user._id}`;
+    const link = `https://654d15f51c9f8500a10cf848--exquisite-mousse-c75562.netlify.app/reset-password/?token=${newToken}&userId=${user._id}`;
 
     const isMailSent = await sendEmail(user.email, "RESET PASSWORD", {
       resetPasswordLink: link,
@@ -226,7 +226,9 @@ exports.verifyAccount = async (req, res) => {
 
     await tokenPayload.save();
 
-    const link = `http://localhost:3000/activate-account/?token=${newToken}&userId=${user._id}`;
+    //https://654d15f51c9f8500a10cf848--exquisite-mousse-c75562.netlify.app/
+
+    const link = `https://654d15f51c9f8500a10cf848--exquisite-mousse-c75562.netlify.app/activate-account/?token=${newToken}&userId=${user._id}`;
 
     const isMailSent = await sendEmail(user.email, "ACTIVATE ACCOUNT", {
       accountActivationLink: link,
