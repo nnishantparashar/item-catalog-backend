@@ -6,9 +6,9 @@ exports.getCartItems = async (req, res) => {
   try {
     const payload = req.body;
     const email = payload.email
-    console.log("user :", email)
+    
 
-    const cartUser = await Carts.find({ user: email });
+    const cartUser = await Carts.findOne({ user: email });
     if (cartUser) {
       return res.status(200).send({
         message: "Cart data have been retrieved successfully.",
