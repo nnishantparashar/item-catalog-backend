@@ -1,12 +1,14 @@
+
 const Carts = require("../models/cart.model");
-const Users = require("../models/user.model");
+
 
 exports.getCartItems = async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const User = await Users.findOne({id: userId});
-    const user = User.email;
-    const cartUser = await Carts.findOne({ user: user });
+    const payload = req.body;
+    const email = payload.email
+    console.log("user :", email)
+
+    const cartUser = await Carts.find({ user: email });
     if (cartUser) {
       return res.status(200).send({
         message: "Cart data have been retrieved successfully.",

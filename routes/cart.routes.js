@@ -4,7 +4,7 @@ const { getCartItems, addCartItem, removeCartItem, updateCartItem } = require(".
 const router = express.Router();
 
 //get all items
-router.get("/cartItems", isAuth, getCartItems);
+router.post("/cartItems", isAuth, getCartItems);
 //add item to cart
 router.post("/addToCart", isAuth, addCartItem);
 //remove item from cart
