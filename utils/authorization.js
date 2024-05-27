@@ -16,4 +16,3 @@ exports.isAdmin = async (req, res, next) => {
     message: "Access denied! Admin Resource.",
   });
 };
-
